@@ -1,0 +1,24 @@
+# dev PV + PVC (hostPath) — for demo only (works on minikube/docker driver)
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: dev-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /tmp/dev-pv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dev-pvc
+  namespace: dev
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

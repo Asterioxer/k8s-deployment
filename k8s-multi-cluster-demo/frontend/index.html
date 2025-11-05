@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>k8s Multi Cluster Demo</title>
+  <style> body{font-family: Arial; padding:20px} .box{padding:12px;border:1px solid #ddd;border-radius:6px} </style>
+</head>
+<body>
+  <h2>Kubernetes Multi-Cluster Demo (Frontend)</h2>
+  <div class="box">
+    <p>This frontend calls <code>/api/hello</code> on the backend</p>
+    <button id="call">Call Backend</button>
+    <pre id="out"></pre>
+  </div>
+
+  <script>
+    document.getElementById('call').addEventListener('click', async () => {
+      const out = document.getElementById('out');
+      out.textContent = 'calling...';
+      try {
+        const res = await fetch('/api/hello');
+        const j = await res.json();
+        out.textContent = JSON.stringify(j, null, 2);
+      } catch (e) {
+        out.textContent = 'error: ' + e;
+      }
+    })
+  </script>
+</body>
+</html>
